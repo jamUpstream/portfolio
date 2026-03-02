@@ -149,8 +149,13 @@
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to   { transform: translateY(0); }
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideDown {
@@ -206,8 +211,13 @@
         /* Must combine translateX(-50%) centering with the Y slide —
            using slideDown alone would overwrite translateX and break centering */
         @keyframes navLinksSlide {
-            from { transform: translateX(-50%) translateY(-100%); }
-            to   { transform: translateX(-50%) translateY(0); }
+            from {
+                transform: translateX(-50%) translateY(-100%);
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
         .nav-links a {
@@ -278,7 +288,8 @@
         /* Placeholder reserves space in nav-right so layout doesn't shift */
         .hamburger-placeholder {
             display: none;
-            width: 41px; /* matches hamburger padding + icon width */
+            width: 41px;
+            /* matches hamburger padding + icon width */
             height: 41px;
             flex-shrink: 0;
         }
@@ -357,8 +368,10 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
             animation: settingsDrop .25s cubic-bezier(0.16, 1, 0.3, 1);
             /* Hide scrollbar but keep scrollable */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
         }
 
         /* Hide scrollbar for Chrome/Safari/Opera */
@@ -371,6 +384,7 @@
                 opacity: 0;
                 transform: translateY(-16px) scale(0.97);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -382,6 +396,7 @@
                 opacity: 0;
                 transform: translateY(100%)
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0)
@@ -751,13 +766,25 @@
            across the hero section elements.
         ═══════════════════════════════════════════ */
         @keyframes pageEnter {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes pageEnterFade {
-            from { opacity: 0; }
-            to   { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Background canvas/effect fades in */
@@ -785,9 +812,18 @@
             margin-bottom: 2rem;
             animation: pageEnter .6s ease-out .25s both, pulse 2s ease-in-out 1.2s infinite;
         }
-        .hero h1       { animation: pageEnter .65s ease-out .38s both; }
-        .hero-subtitle { animation: pageEnter .65s ease-out .50s both; }
-        .cta-button    { animation: pageEnter .65s ease-out .62s both; }
+
+        .hero h1 {
+            animation: pageEnter .65s ease-out .38s both;
+        }
+
+        .hero-subtitle {
+            animation: pageEnter .65s ease-out .50s both;
+        }
+
+        .cta-button {
+            animation: pageEnter .65s ease-out .62s both;
+        }
 
         @keyframes pulse {
 
@@ -1103,22 +1139,23 @@
             gap: 2rem
         }
 
-        
-.project-card {
-    /* Default visual style: solid cards (glass only when Visual Style = Glass) */
-    background: var(--secondary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    position: relative;
-    /* NOTE: overflow:hidden removed — it prevents backdrop-filter from rendering
+
+        .project-card {
+            /* Default visual style: solid cards (glass only when Visual Style = Glass) */
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+            position: relative;
+            /* NOTE: overflow:hidden removed — it prevents backdrop-filter from rendering
        in Chrome/Edge. Use border-radius on children instead if clipping is needed. */
-    overflow: visible;
-    will-change: transform;
-    background-clip: padding-box;
-    isolation: isolate;
-}
+            overflow: visible;
+            will-change: transform;
+            background-clip: padding-box;
+            isolation: isolate;
+        }
+
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
@@ -1132,7 +1169,8 @@
         .contact-card {
             isolation: isolate;
         }
-.project-card>*,
+
+        .project-card>*,
         .skill-card>*,
         .timeline-item>*,
         .contact-card>* {
@@ -1681,8 +1719,13 @@
 
             /* hamburger uses translateY(-50%) for centering — must combine both in keyframe */
             @keyframes hamburgerSlide {
-                from { transform: translateY(calc(-50% - var(--header-h, 75px))); }
-                to   { transform: translateY(-50%); }
+                from {
+                    transform: translateY(calc(-50% - var(--header-h, 75px)));
+                }
+
+                to {
+                    transform: translateY(-50%);
+                }
             }
 
             /* Cancel the desktop navLinksSlide — mobile nav is a side panel, not a top bar */
@@ -1727,6 +1770,7 @@
             .games-btn-mobile:hover {
                 background: var(--accent-bg-md)
             }
+
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -1755,7 +1799,8 @@
             .nav-links.active {
                 transform: translateX(0);
             }
-.nav-links a {
+
+            .nav-links a {
                 font-size: 1.2rem
             }
 
@@ -1784,37 +1829,45 @@
 
         }
 
-        
 
-/* ── Backdrop-filter fallback (older browsers) ── */
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    header { backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .project-card,
-    .skill-card,
-    .timeline-item,
-    .contact-card,
-    .settings-panel,
-    .games-panel {
-        background: var(--secondary);
-    }
-    @media (max-width: 768px) {
-        .nav-links { background: var(--secondary); }
-    }
-}
 
-/* ── GPU compositing layer: ensures backdrop-filter renders across all browsers ──
+        /* ── Backdrop-filter fallback (older browsers) ── */
+        @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+            header {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+
+            .project-card,
+            .skill-card,
+            .timeline-item,
+            .contact-card,
+            .settings-panel,
+            .games-panel {
+                background: var(--secondary);
+            }
+
+            @media (max-width: 768px) {
+                .nav-links {
+                    background: var(--secondary);
+                }
+            }
+        }
+
+        /* ── GPU compositing layer: ensures backdrop-filter renders across all browsers ──
    Applied in glass mode to all elements using backdrop-filter.
    translateZ(0) promotes the element to its own compositing layer.           ── */
-html[data-visual="glass"] .skill-card {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
-html[data-visual="glass"] .contact-card {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
+        html[data-visual="glass"] .skill-card {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
 
-/* ===================== STARFIELD CANVAS (BG EFFECT: STARS) ===================== */
+        html[data-visual="glass"] .contact-card {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+
+        /* ===================== STARFIELD CANVAS (BG EFFECT: STARS) ===================== */
         #starsCanvas {
             position: fixed;
             inset: 0;
@@ -1846,7 +1899,7 @@ html[data-visual="glass"] .contact-card {
             opacity: 1;
         }
 
-/* ═══════════════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════
    GLASS THEME SYSTEM
    Activated by: html[data-visual="glass"]
 
@@ -1862,528 +1915,774 @@ html[data-visual="glass"] .contact-card {
    actual visual content to blur through.
    ═══════════════════════════════════════════════════════ */
 
-/* ── Glass Theme Tokens ── */
-html[data-visual="glass"] {
-    --glass-bg-light: rgba(255, 255, 255, 0.04);
-    --glass-bg-mid: rgba(255, 255, 255, 0.07);
-    --glass-bg-strong: rgba(255, 255, 255, 0.11);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-accent: rgba(255, 255, 255, 0.22);
-    --glass-blur: blur(16px);
-    --glass-blur-sm: blur(8px);
-    --glass-blur-lg: blur(24px);
-    --glass-highlight: rgba(255, 255, 255, 0.07);
-    --glass-shadow: rgba(0, 0, 0, 0.35);
-    --glass-shine: rgba(255, 255, 255, 0.15);
-}
+        /* ── Glass Theme Tokens ── */
+        html[data-visual="glass"] {
+            --glass-bg-light: rgba(255, 255, 255, 0.04);
+            --glass-bg-mid: rgba(255, 255, 255, 0.07);
+            --glass-bg-strong: rgba(255, 255, 255, 0.11);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-border-accent: rgba(255, 255, 255, 0.22);
+            --glass-blur: blur(16px);
+            --glass-blur-sm: blur(8px);
+            --glass-blur-lg: blur(24px);
+            --glass-highlight: rgba(255, 255, 255, 0.07);
+            --glass-shadow: rgba(0, 0, 0, 0.35);
+            --glass-shine: rgba(255, 255, 255, 0.15);
+        }
 
-/* ── Depth layer: real DOM div injected by JS ── */
-#glass-depth-layer {
-    display: none;
-}
+        /* ── Depth layer: real DOM div injected by JS ── */
+        #glass-depth-layer {
+            display: none;
+        }
 
-html[data-visual="glass"] #glass-depth-layer {
-    display: block;
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    /* Much stronger gradients — backdrop-filter needs real visual contrast to blur.
+        html[data-visual="glass"] #glass-depth-layer {
+            display: block;
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            /* Much stronger gradients — backdrop-filter needs real visual contrast to blur.
        The previous 4-6% white opacity was too subtle; these go up to 22% so
        the blur effect is actually visible through semi-transparent cards.      */
-    background:
-        radial-gradient(ellipse 75% 55% at 12% 18%,  rgba(0, 245, 160, 0.13) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 45% at 88% 80%,  rgba(0, 140, 255, 0.11) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 60% at 50% 50%,  rgba(255,255,255, 0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 35% at 25% 70%,  rgba(0, 245, 160, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 40% at 78% 20%,  rgba(80, 80, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 30% 25% at 60% 85%,  rgba(255,255,255, 0.05) 0%, transparent 45%);
-}
+            background:
+                radial-gradient(ellipse 75% 55% at 12% 18%, rgba(0, 245, 160, 0.13) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 45% at 88% 80%, rgba(0, 140, 255, 0.11) 0%, transparent 55%),
+                radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 255, 255, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 35% at 25% 70%, rgba(0, 245, 160, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 40% at 78% 20%, rgba(80, 80, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 30% 25% at 60% 85%, rgba(255, 255, 255, 0.05) 0%, transparent 45%);
+        }
 
-/* ── Body keeps its background — we do NOT make it transparent ──
+        /* ── Body keeps its background — we do NOT make it transparent ──
    backdrop-filter on cards will blur the depth layer above body's bg
    since #glass-depth-layer is position:fixed z-index:0 and cards
    are z-index:1 or higher via their stacking context.             ── */
 
-/* ── Header: glass nav ── */
-html[data-visual="glass"] header {
-    background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
-    backdrop-filter: blur(24px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.10);
-}
+        /* ── Header: glass nav ── */
+        html[data-visual="glass"] header {
+            background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        }
 
-/* ── Mobile nav drawer: glass panel — full blur works since nav-links is outside <header> ── */
-@media (max-width: 768px) {
-    html[data-visual="glass"] .nav-links {
-        background: color-mix(in srgb, var(--primary) 60%, transparent) !important;
-        backdrop-filter: blur(40px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
-        border-left: 1px solid rgba(255,255,255,0.14) !important;
-        box-shadow: -8px 0 40px rgba(0,0,0,0.35),
-                    inset 1px 0 0 rgba(255,255,255,0.10) !important;
-    }
-    html[data-visual="glass"] .nav-links.active {
-        transform: translateX(0) !important;
-    }
-}
+        /* ── Mobile nav drawer: glass panel — full blur works since nav-links is outside <header> ── */
+        @media (max-width: 768px) {
+            html[data-visual="glass"] .nav-links {
+                background: color-mix(in srgb, var(--primary) 60%, transparent) !important;
+                backdrop-filter: blur(40px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+                border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
+                box-shadow: -8px 0 40px rgba(0, 0, 0, 0.35),
+                    inset 1px 0 0 rgba(255, 255, 255, 0.10) !important;
+            }
 
-/* ── Project Cards ── */
-html[data-visual="glass"] .project-card {
-    /* color-mix adapts to the current background theme automatically */
-    background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
-    backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.30),
-                inset 0 1px 0 rgba(255,255,255,0.18),
-                inset 0 0 0 1px rgba(255,255,255,0.05);
-    position: relative;
-    /* Force GPU compositing layer — required for -webkit-backdrop-filter on mobile */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    /* overflow:visible is already set; ensure content clips via clip-path, not overflow */
-    clip-path: inset(0 round 12px);
-}
+            html[data-visual="glass"] .nav-links.active {
+                transform: translateX(0) !important;
+            }
+        }
 
-/* Top-edge shine — visible glass cue */
-html[data-visual="glass"] .project-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-        155deg,
-        rgba(255,255,255,0.09) 0%,
-        rgba(255,255,255,0.02) 35%,
-        transparent 60%
-    );
-    pointer-events: none;
-    z-index: 0;
-}
+        /* ── Project Cards ── */
+        html[data-visual="glass"] .project-card {
+            /* color-mix adapts to the current background theme automatically */
+            background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
+            backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            position: relative;
+            /* Force GPU compositing layer — required for -webkit-backdrop-filter on mobile */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            /* overflow:visible is already set; ensure content clips via clip-path, not overflow */
+            clip-path: inset(0 round 12px);
+        }
 
-html[data-visual="glass"] .project-card:hover {
-    background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
-    backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    /* clip-path clips real borders, so we use box-shadow rings for the border effect */
-    border-color: var(--accent) !important;
-    box-shadow: 0 10px 40px var(--accent-shadow),
+        /* Top-edge shine — visible glass cue */
+        html[data-visual="glass"] .project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(155deg,
+                    rgba(255, 255, 255, 0.09) 0%,
+                    rgba(255, 255, 255, 0.02) 35%,
+                    transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        html[data-visual="glass"] .project-card:hover {
+            background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
+            backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            /* clip-path clips real borders, so we use box-shadow rings for the border effect */
+            border-color: var(--accent) !important;
+            box-shadow: 0 10px 40px var(--accent-shadow),
                 0 0 0 1px var(--accent),
-                inset 0 1px 0 rgba(255,255,255,0.24);
-    transform: translateY(-5px) translateZ(0);
-    -webkit-transform: translateY(-5px) translateZ(0);
-    /* Temporarily lift clip-path so the border/shadow renders fully */
-    clip-path: none;
-}
+                inset 0 1px 0 rgba(255, 255, 255, 0.24);
+            transform: translateY(-5px) translateZ(0);
+            -webkit-transform: translateY(-5px) translateZ(0);
+            /* Temporarily lift clip-path so the border/shadow renders fully */
+            clip-path: none;
+        }
 
-/* ── Skill Cards ── */
-html[data-visual="glass"] .skill-card {
-    background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
-    backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25),
-                inset 0 1px 0 rgba(255,255,255,0.16),
-                inset 0 0 0 1px rgba(255,255,255,0.04);
-    position: relative;
-    clip-path: inset(0 round 12px);
-}
+        /* ── Skill Cards ── */
+        html[data-visual="glass"] .skill-card {
+            background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
+            backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            position: relative;
+            clip-path: inset(0 round 12px);
+        }
 
-html[data-visual="glass"] .skill-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-        150deg,
-        rgba(255,255,255,0.08) 0%,
-        rgba(255,255,255,0.01) 40%,
-        transparent 65%
-    );
-    pointer-events: none;
-    z-index: 0;
-}
+        html[data-visual="glass"] .skill-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(150deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.01) 40%,
+                    transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-html[data-visual="glass"] .skill-card:hover {
-    background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 10px 40px var(--accent-shadow),
+        html[data-visual="glass"] .skill-card:hover {
+            background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 10px 40px var(--accent-shadow),
                 0 0 0 1px var(--accent),
-                inset 0 1px 0 rgba(255,255,255,0.20);
-    transform: translateY(-5px) translateZ(0);
-    -webkit-transform: translateY(-5px) translateZ(0);
-    clip-path: none;
-}
+                inset 0 1px 0 rgba(255, 255, 255, 0.20);
+            transform: translateY(-5px) translateZ(0);
+            -webkit-transform: translateY(-5px) translateZ(0);
+            clip-path: none;
+        }
 
-/* ── Contact Card ── */
-html[data-visual="glass"] .contact-card {
-    background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
-    backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.28),
-                inset 0 1px 0 rgba(255,255,255,0.14);
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
+        /* ── Contact Card ── */
+        html[data-visual="glass"] .contact-card {
+            background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
+            backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
 
-html[data-visual="glass"] .contact-card:hover {
-    background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 10px 40px var(--accent-shadow),
+        html[data-visual="glass"] .contact-card:hover {
+            background: color-mix(in srgb, var(--primary) 42%, transparent) !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 10px 40px var(--accent-shadow),
                 0 0 0 1px var(--accent),
-                inset 0 1px 0 rgba(255,255,255,0.20);
-}
+                inset 0 1px 0 rgba(255, 255, 255, 0.20);
+        }
 
-/* ── Settings Panel (glass) ── */
-html[data-visual="glass"] .settings-panel {
-    background: color-mix(in srgb, var(--primary) 55%, transparent) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1px solid rgba(255,255,255,0.13) !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.12) !important;
-    /* Use opacity-only animation in glass mode so the panel itself
+        /* ── Settings Panel (glass) ── */
+        html[data-visual="glass"] .settings-panel {
+            background: color-mix(in srgb, var(--primary) 55%, transparent) !important;
+            backdrop-filter: blur(28px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            /* Use opacity-only animation in glass mode so the panel itself
        doesn't create an intermediate stacking context that would
        trap .settings-header's own backdrop-filter. */
-    animation: settingsGlassDrop .25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
+            animation: settingsGlassDrop .25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
 
-@keyframes settingsGlassDrop {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
+        @keyframes settingsGlassDrop {
+            from {
+                opacity: 0;
+            }
 
-@media (max-width: 600px) {
-    html[data-visual="glass"] .settings-panel {
-        animation: settingsGlassUp .32s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    @keyframes settingsGlassUp {
-        from { opacity: 0; transform: translateY(40px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-}
+            to {
+                opacity: 1;
+            }
+        }
 
-/* Settings header in glass mode — transparent by default, frosted when content scrolls under */
-html[data-visual="glass"] .settings-header {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: none !important;
-    transition: none !important;
-}
+        @media (max-width: 600px) {
+            html[data-visual="glass"] .settings-panel {
+                animation: settingsGlassUp .32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
 
-html[data-visual="glass"] .settings-header.scrolled {
-    background: color-mix(in srgb, var(--primary) 40%, transparent) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08),
-                0 4px 12px rgba(0,0,0,0.2) !important;
-}
+            @keyframes settingsGlassUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
 
-/* ── Games Panel & Overlay ── */
-html[data-visual="glass"] .games-panel {
-    background: color-mix(in srgb, var(--primary) 85%, transparent) !important;
-    backdrop-filter: blur(28px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
-    border: 1px solid rgba(255,255,255,0.13) !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.12);
-}
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
 
-html[data-visual="glass"] .games-header,
-html[data-visual="glass"] .games-tabs {
-    border-color: rgba(255,255,255,0.10) !important;
-    background: rgba(255, 255, 255, 0.02);
-}
+        /* Settings header in glass mode — transparent by default, frosted when content scrolls under */
+        html[data-visual="glass"] .settings-header {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: none !important;
+            transition: none !important;
+        }
 
-html[data-visual="glass"] .games-overlay {
-    background: rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-}
+        html[data-visual="glass"] .settings-header.scrolled {
+            background: color-mix(in srgb, var(--primary) 40%, transparent) !important;
+            backdrop-filter: blur(28px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        }
 
-html[data-visual="glass"] .game-tab.active {
-    background: var(--glass-bg-mid) !important;
-}
+        /* ── Games Panel & Overlay ── */
+        html[data-visual="glass"] .games-panel {
+            background: color-mix(in srgb, var(--primary) 85%, transparent) !important;
+            backdrop-filter: blur(28px) saturate(160%) !important;
+            -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
 
-html[data-visual="glass"] .game-tab:hover:not(.active) {
-    background: var(--glass-bg-light) !important;
-}
+        html[data-visual="glass"] .games-header,
+        html[data-visual="glass"] .games-tabs {
+            border-color: rgba(255, 255, 255, 0.10) !important;
+            background: rgba(255, 255, 255, 0.02);
+        }
 
-/* ── Form inputs ── */
-html[data-visual="glass"] input,
-html[data-visual="glass"] textarea {
-    background: color-mix(in srgb, var(--primary) 55%, transparent) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-}
+        html[data-visual="glass"] .games-overlay {
+            background: rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
 
-html[data-visual="glass"] input:focus,
-html[data-visual="glass"] textarea:focus {
-    background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
-    border-color: var(--accent-border-strong) !important;
-    box-shadow: 0 0 0 3px var(--accent-shadow),
-                inset 0 1px 0 rgba(255,255,255,0.10) !important;
-}
+        html[data-visual="glass"] .game-tab.active {
+            background: var(--glass-bg-mid) !important;
+        }
 
-/* ── Hero tag badge ── */
-html[data-visual="glass"] .hero-tag {
-    background: rgba(255,255,255,0.08) !important;
-    backdrop-filter: blur(14px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
-    border: 1px solid rgba(255,255,255,0.20) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18),
-                0 4px 16px rgba(0,0,0,0.2);
-}
+        html[data-visual="glass"] .game-tab:hover:not(.active) {
+            background: var(--glass-bg-light) !important;
+        }
 
-/* ── CTA Button ── */
-html[data-visual="glass"] .cta-button {
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    box-shadow: 0 4px 20px var(--accent-shadow-lg),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-}
+        /* ── Form inputs ── */
+        html[data-visual="glass"] input,
+        html[data-visual="glass"] textarea {
+            background: color-mix(in srgb, var(--primary) 55%, transparent) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
 
-html[data-visual="glass"] .cta-button:hover {
-    background: rgba(255,255,255,0.08) !important;
-    box-shadow: 0 10px 40px var(--accent-shadow-lg),
-                inset 0 1px 0 rgba(255,255,255,0.14);
-}
+        html[data-visual="glass"] input:focus,
+        html[data-visual="glass"] textarea:focus {
+            background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+            border-color: var(--accent-border-strong) !important;
+            box-shadow: 0 0 0 3px var(--accent-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+        }
 
-/* ── Submit Button ── */
-html[data-visual="glass"] .submit-button:hover {
-    background: rgba(255,255,255,0.08) !important;
-    box-shadow: 0 10px 30px var(--accent-shadow-lg),
-                inset 0 1px 0 rgba(255,255,255,0.12);
-}
+        /* ── Hero tag badge ── */
+        html[data-visual="glass"] .hero-tag {
+            background: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(14px) saturate(140%) !important;
+            -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.20) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                0 4px 16px rgba(0, 0, 0, 0.2);
+        }
 
-/* ── Games Button ── */
-html[data-visual="glass"] .games-btn,
-html[data-visual="glass"] .games-btn-mobile {
-    background: rgba(255,255,255,0.06) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
-}
+        /* ── CTA Button ── */
+        html[data-visual="glass"] .cta-button {
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: 0 4px 20px var(--accent-shadow-lg),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
 
-html[data-visual="glass"] .games-btn:hover,
-html[data-visual="glass"] .games-btn-mobile:hover {
-    background: rgba(255,255,255,0.10) !important;
-}
+        html[data-visual="glass"] .cta-button:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 10px 40px var(--accent-shadow-lg),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        }
 
-/* ── Settings & game buttons ── */
-html[data-visual="glass"] .settings-btn {
-    background: rgba(255,255,255,0.06) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    border-color: rgba(255,255,255,0.12) !important;
-}
+        /* ── Submit Button ── */
+        html[data-visual="glass"] .submit-button:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 10px 30px var(--accent-shadow-lg),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
 
-html[data-visual="glass"] .settings-btn:hover {
-    background: rgba(255,255,255,0.10) !important;
-    border-color: rgba(255,255,255,0.22) !important;
-}
+        /* ── Games Button ── */
+        html[data-visual="glass"] .games-btn,
+        html[data-visual="glass"] .games-btn-mobile {
+            background: rgba(255, 255, 255, 0.06) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        }
 
-html[data-visual="glass"] .game-btn {
-    background: rgba(255,255,255,0.06) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
-}
+        html[data-visual="glass"] .games-btn:hover,
+        html[data-visual="glass"] .games-btn-mobile:hover {
+            background: rgba(255, 255, 255, 0.10) !important;
+        }
 
-html[data-visual="glass"] .game-btn:hover {
-    background: rgba(255,255,255,0.10) !important;
-}
+        /* ── Settings & game buttons ── */
+        html[data-visual="glass"] .settings-btn {
+            background: rgba(255, 255, 255, 0.06) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
 
-/* ── Theme options in settings panel ── */
-html[data-visual="glass"] .theme-opt {
-    background: rgba(255,255,255,0.04) !important;
-    border-color: rgba(255,255,255,0.10) !important;
-}
+        html[data-visual="glass"] .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border-color: rgba(255, 255, 255, 0.22) !important;
+        }
 
-html[data-visual="glass"] .theme-opt:hover {
-    background: rgba(255,255,255,0.08) !important;
-    border-color: var(--accent) !important;
-}
+        html[data-visual="glass"] .game-btn {
+            background: rgba(255, 255, 255, 0.06) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        }
 
-html[data-visual="glass"] .theme-opt.active {
-    background: rgba(255,255,255,0.10) !important;
-    border-color: var(--accent) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
-}
+        html[data-visual="glass"] .game-btn:hover {
+            background: rgba(255, 255, 255, 0.10) !important;
+        }
 
-/* ── Reaction area ── */
-html[data-visual="glass"] .reaction-area {
-    background: color-mix(in srgb, var(--primary) 65%, transparent) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-color: rgba(255,255,255,0.12) !important;
-}
+        /* ── Theme options in settings panel ── */
+        html[data-visual="glass"] .theme-opt {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border-color: rgba(255, 255, 255, 0.10) !important;
+        }
 
-html[data-visual="glass"] .reaction-area.ready {
-    background: var(--secondary) !important;
-    border-color: var(--reaction-ready-border, var(--accent)) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+        html[data-visual="glass"] .theme-opt:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-color: var(--accent) !important;
+        }
 
-html[data-visual="glass"] .reaction-area:not(.ready):not(.too-soon) {
-    background: color-mix(in srgb, var(--primary) 80%, transparent) !important;
-}
+        html[data-visual="glass"] .theme-opt.active {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border-color: var(--accent) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
 
-html[data-visual="glass"] .reaction-area.too-soon {
-    background: #2a0a0a !important;
-    border-color: #f55 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+        /* ── Reaction area ── */
+        html[data-visual="glass"] .reaction-area {
+            background: color-mix(in srgb, var(--primary) 65%, transparent) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
 
-/* ── Typing & Aim game inner boxes ── */
-html[data-visual="glass"] .typing-target,
-html[data-visual="glass"] .aim-wrapper {
-    background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-color: rgba(255,255,255,0.12) !important;
-}
+        html[data-visual="glass"] .reaction-area.ready {
+            background: var(--secondary) !important;
+            border-color: var(--reaction-ready-border, var(--accent)) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
 
-/* ── Skill bar track ── */
-html[data-visual="glass"] .skill-bar {
-    background: rgba(255, 255, 255, 0.06) !important;
-}
+        html[data-visual="glass"] .reaction-area:not(.ready):not(.too-soon) {
+            background: color-mix(in srgb, var(--primary) 80%, transparent) !important;
+        }
 
-/* ── Section borders ── */
-html[data-visual="glass"] footer,
-html[data-visual="glass"] .contact {
-    border-color: rgba(255,255,255,0.08) !important;
-}
+        html[data-visual="glass"] .reaction-area.too-soon {
+            background: #2a0a0a !important;
+            border-color: #f55 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
 
-html[data-visual="glass"] .stats-bar {
-    border-color: rgba(255,255,255,0.08) !important;
-}
+        /* ── Typing & Aim game inner boxes ── */
+        html[data-visual="glass"] .typing-target,
+        html[data-visual="glass"] .aim-wrapper {
+            background: color-mix(in srgb, var(--primary) 50%, transparent) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
 
-html[data-visual="glass"] .project-result {
-    border-color: rgba(255,255,255,0.08) !important;
-}
+        /* ── Skill bar track ── */
+        html[data-visual="glass"] .skill-bar {
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
 
-html[data-visual="glass"] .reaction-scores {
-    border-color: rgba(255,255,255,0.08) !important;
-}
+        /* ── Section borders ── */
+        html[data-visual="glass"] footer,
+        html[data-visual="glass"] .contact {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
 
-/* ── Mobile settings bottom sheet drag handle ── */
-@media (max-width: 600px) {
-    html[data-visual="glass"] .settings-panel::before {
-        background: rgba(255,255,255,0.15) !important;
-    }
-}
+        html[data-visual="glass"] .stats-bar {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
 
-/* ══════════════════════════════════════════════════════
+        html[data-visual="glass"] .project-result {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        html[data-visual="glass"] .reaction-scores {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* ── Mobile settings bottom sheet drag handle ── */
+        @media (max-width: 600px) {
+            html[data-visual="glass"] .settings-panel::before {
+                background: rgba(255, 255, 255, 0.15) !important;
+            }
+        }
+
+        /* ══════════════════════════════════════════════════════
    OPT-OUT: .no-glass — solid styling for dense content
    ══════════════════════════════════════════════════════ */
-html[data-visual="glass"] .no-glass,
-html[data-visual="glass"] .no-glass * {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+        html[data-visual="glass"] .no-glass,
+        html[data-visual="glass"] .no-glass * {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
 
-html[data-visual="glass"] .no-glass {
-    background: var(--secondary) !important;
-    border-color: var(--border) !important;
-    box-shadow: none !important;
-}
+        html[data-visual="glass"] .no-glass {
+            background: var(--secondary) !important;
+            border-color: var(--border) !important;
+            box-shadow: none !important;
+        }
 
-/* ── Project result blocks: flat separator, no nested card ── */
-html[data-visual="glass"] .project-result {
-    background: transparent !important;
-    border-radius: 0 !important;
-    padding: 1.5rem 0 0 !important;
-    margin: 1.5rem 0 0 !important;
-    border-top: 1px solid rgba(255,255,255,0.08) !important;
-}
+        /* ── Project result blocks: flat separator, no nested card ── */
+        html[data-visual="glass"] .project-result {
+            background: transparent !important;
+            border-radius: 0 !important;
+            padding: 1.5rem 0 0 !important;
+            margin: 1.5rem 0 0 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
 
-/* ── Score chips & tech tags: keep solid ── */
-html[data-visual="glass"] .score-chip {
-    background: var(--accent-bg) !important;
-    backdrop-filter: none !important;
-}
+        /* ── Score chips & tech tags: keep solid ── */
+        html[data-visual="glass"] .score-chip {
+            background: var(--accent-bg) !important;
+            backdrop-filter: none !important;
+        }
 
-html[data-visual="glass"] .tech-tag {
-    background: var(--accent-bg) !important;
-    backdrop-filter: none !important;
-}
+        html[data-visual="glass"] .tech-tag {
+            background: var(--accent-bg) !important;
+            backdrop-filter: none !important;
+        }
 
-/* ── Visual Style toggle buttons in settings ── */
-.visual-style-options {
+        /* ── Visual Style toggle buttons in settings ── */
+        .visual-style-options {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .visual-style-btn {
+            flex: 1;
+            padding: .6rem .5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .72rem;
+            color: var(--text-dim);
+            background: none;
+            transition: all .25s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .visual-style-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .visual-style-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-bg-xs);
+        }
+
+        .visual-style-icon {
+            width: 28px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid currentColor;
+            position: relative;
+            opacity: 0.7;
+        }
+
+        .visual-style-btn[data-visual="default"] .visual-style-icon {
+            background: var(--secondary);
+            border-color: var(--border);
+        }
+
+        .visual-style-btn[data-visual="glass"] .visual-style-icon {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .visual-style-btn[data-visual="glass"] .visual-style-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 100%);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .visual-style-btn.active .visual-style-icon {
+            border-color: var(--accent);
+            opacity: 1;
+        }
+/* ===================== GAME INTRO ===================== */
+.gi-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #000;
     display: flex;
-    gap: .5rem;
-}
-
-.visual-style-btn {
-    flex: 1;
-    padding: .6rem .5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     cursor: pointer;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: .72rem;
-    color: var(--text-dim);
-    background: none;
-    transition: all .25s;
+}
+.gi-overlay.gi-fade-out {
+    animation: giFadeOut .6s ease forwards;
+}
+@keyframes giFadeOut {
+    0%   { opacity: 1; transform: scale(1); }
+    60%  { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 0; transform: scale(1.04); pointer-events: none; }
+}
+
+#giCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .55;
+}
+
+.gi-scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 245, 160, .03) 2px,
+        rgba(0, 245, 160, .03) 4px
+    );
+    z-index: 1;
+    animation: giScanMove 8s linear infinite;
+}
+@keyframes giScanMove {
+    from { background-position: 0 0; }
+    to   { background-position: 0 200px; }
+}
+
+/* Corner brackets */
+.gi-corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #00F5A0;
+    border-style: solid;
+    opacity: 0;
+    animation: giCornerIn .4s ease forwards;
+    z-index: 2;
+}
+.gi-corner.gi-tl { top: 18px; left: 18px; border-width: 2px 0 0 2px; animation-delay: .1s; }
+.gi-corner.gi-tr { top: 18px; right: 18px; border-width: 2px 2px 0 0; animation-delay: .15s; }
+.gi-corner.gi-bl { bottom: 18px; left: 18px; border-width: 0 0 2px 2px; animation-delay: .2s; }
+.gi-corner.gi-br { bottom: 18px; right: 18px; border-width: 0 2px 2px 0; animation-delay: .25s; }
+@keyframes giCornerIn {
+    from { opacity: 0; transform: scale(.7); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Horizontal bars */
+.gi-hbar {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,160,.4), rgba(0,245,160,.7), rgba(0,245,160,.4), transparent);
+    opacity: 0;
+    animation: giHbarIn .5s ease forwards;
+    z-index: 2;
+}
+.gi-hbar-top { top: 50px; animation-delay: .3s; }
+.gi-hbar-bot { bottom: 50px; animation-delay: .35s; }
+@keyframes giHbarIn {
+    from { opacity: 0; transform: scaleX(0); }
+    to   { opacity: 1; transform: scaleX(1); }
+}
+
+/* Main content */
+.gi-content {
+    position: relative;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: .35rem;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem;
+    text-align: center;
 }
 
-.visual-style-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+/* Boot log */
+.gi-boot-log {
+    font-size: .72rem;
+    letter-spacing: .05em;
+    margin-bottom: 1.4rem;
+    height: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .18rem;
+    width: 100%;
+    max-width: 420px;
 }
-
-.visual-style-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-bg-xs);
-}
-
-.visual-style-icon {
-    width: 28px;
-    height: 20px;
-    border-radius: 4px;
-    border: 1px solid currentColor;
-    position: relative;
-    opacity: 0.7;
-}
-
-.visual-style-btn[data-visual="default"] .visual-style-icon {
-    background: var(--secondary);
-    border-color: var(--border);
-}
-
-.visual-style-btn[data-visual="glass"] .visual-style-icon {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+.gi-boot-log .gi-log-line {
+    opacity: 0;
+    animation: giLogLine .25s ease forwards;
+    text-align: left;
+    white-space: nowrap;
     overflow: hidden;
 }
+@keyframes giLogLine {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
 
-.visual-style-btn[data-visual="glass"] .visual-style-icon::after {
+/* Logo */
+.gi-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: .1em;
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+}
+.gi-logo-wrap.gi-logo-in {
+    animation: giLogoIn .5s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes giLogoIn {
+    from { opacity: 0; transform: scale(.85) translateY(12px); filter: blur(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.gi-logo-bracket {
+    color: rgba(0,245,160,.5);
+}
+.gi-logo-text {
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0,245,160,.6), 0 0 60px rgba(0,245,160,.3);
+}
+.gi-logo-cursor {
+    width: .08em;
+    height: .9em;
+    background: #00F5A0;
+    box-shadow: 0 0 12px rgba(0,245,160,.8);
+    animation: giCursorBlink .7s step-end infinite;
+    margin-left: .05em;
+    display: none;
+}
+.gi-logo-cursor.visible { display: block; }
+@keyframes giCursorBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* Tagline */
+.gi-tagline {
+    font-size: clamp(.6rem, 2vw, .85rem);
+    letter-spacing: .35em;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+}
+.gi-tagline.gi-tag-in {
+    animation: giTagIn .4s ease .1s forwards;
+}
+@keyframes giTagIn {
+    from { opacity: 0; letter-spacing: .6em; }
+    to   { opacity: 1; letter-spacing: .35em; }
+}
+
+/* Press any key */
+.gi-press {
+    font-size: clamp(.65rem, 2vw, .82rem);
+    color: rgba(255,255,255,.55);
+    letter-spacing: .18em;
+    opacity: 0;
+    margin-bottom: .8rem;
+}
+.gi-press.gi-press-in {
+    animation: giPressIn .5s ease forwards, giPressPulse 1.8s ease-in-out .5s infinite;
+}
+@keyframes giPressIn {
+    from { opacity: 0; }
+    to   { opacity: .55; }
+}
+@keyframes giPressPulse {
+    0%, 100% { opacity: .35; }
+    50%       { opacity: .85; }
+}
+
+/* Glitch effect on logo — colors injected via JS */
+@keyframes giGlitch {
+    0%  { clip-path: inset(10% 0 60% 0); }
+    33% { clip-path: inset(50% 0 20% 0); transform: translateX(2px); }
+    66% { clip-path: inset(30% 0 40% 0); transform: translateX(-1px); }
+    100%{ clip-path: none; transform: none; }
+}
+
+/* Progress bar */
+.gi-progress-wrap {
+    width: 240px;
+    height: 2px;
+    margin-bottom: 1.8rem;
+    position: relative;
+    overflow: hidden;
+}
+.gi-progress-fill {
+    height: 100%;
+    width: 0%;
+    transition: width .15s ease;
+}
+
+/* Exit burst — color injected via JS on the element directly */
+.gi-overlay.gi-exit-burst::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 40%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
-    border-radius: 3px 3px 0 0;
+    inset: 0;
+    animation: giBurst .35s ease forwards;
 }
-
-.visual-style-btn.active .visual-style-icon {
-    border-color: var(--accent);
-    opacity: 1;
+@keyframes giBurst {
+    from { opacity: 0; transform: scale(.5); }
+    50%  { opacity: 1; }
+    to   { opacity: 0; transform: scale(1.8); }
 }
-
+/* ===================== END GAME INTRO ===================== */

@@ -1,3 +1,233 @@
+// ===================== GAME INTRO =====================
+(function () {
+    const overlay = document.getElementById('gameIntro');
+    const canvas  = document.getElementById('giCanvas');
+    const ctx     = canvas.getContext('2d');
+    const bootLog = document.getElementById('giBootLog');
+    const logoWrap = document.getElementById('giLogoWrap');
+    const logoText = document.getElementById('giLogoText');
+    const tagline  = document.getElementById('giTagline');
+    const pressEl  = document.getElementById('giPress');
+
+    // Don't show intro if user has already seen it this session
+    if (sessionStorage.getItem('gi_seen')) {
+        overlay.style.display = 'none';
+        return;
+    }
+
+    // ── Read saved accent color ───────────────────────────
+    const savedAccent = localStorage.getItem('pf_accent') || '#00F5A0';
+    // Parse hex → rgb
+    function hexToRgb(hex) {
+        let h = hex.replace('#', '');
+        if (h.length === 3) h = h.split('').map(x => x + x).join('');
+        const n = parseInt(h, 16);
+        return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+    const ac = hexToRgb(savedAccent);
+    const acRgb   = `${ac.r},${ac.g},${ac.b}`;
+    const acFull  = savedAccent;
+    const acHalf  = `rgba(${acRgb},.5)`;
+    const acDim   = `rgba(${acRgb},.2)`;
+    const acGlow  = `rgba(${acRgb},.6)`;
+    const acGlow2 = `rgba(${acRgb},.3)`;
+    const acScan  = `rgba(${acRgb},.03)`;
+    const acBar   = `rgba(${acRgb},.1)`;
+    const acBarFg = `rgba(${acRgb},.4)`;
+    const acBarGlow = `rgba(${acRgb},.8)`;
+    const acTagline = `rgba(${acRgb},.7)`;
+    const acLog   = `rgba(${acRgb},.5)`;
+
+    // Apply accent to DOM elements that use inline color
+    // Corners
+    document.querySelectorAll('.gi-corner').forEach(el => el.style.borderColor = acFull);
+    // H-bars
+    document.querySelectorAll('.gi-hbar').forEach(el => {
+        el.style.background = `linear-gradient(90deg, transparent, ${acBarFg}, ${acFull}, ${acBarFg}, transparent)`;
+    });
+    // Scanlines
+    const scanlines = overlay.querySelector('.gi-scanlines');
+    scanlines.style.background = `repeating-linear-gradient(0deg, transparent 0px, transparent 2px, ${acScan} 2px, ${acScan} 4px)`;
+
+    // CSS custom props scoped to overlay for all child color refs
+    overlay.style.setProperty('--gi-accent',      acFull);
+    overlay.style.setProperty('--gi-accent-half',  acHalf);
+    overlay.style.setProperty('--gi-accent-dim',   acDim);
+    overlay.style.setProperty('--gi-accent-glow',  acGlow);
+    overlay.style.setProperty('--gi-accent-glow2', acGlow2);
+    overlay.style.setProperty('--gi-accent-bar',   acBar);
+    overlay.style.setProperty('--gi-accent-bar-fg',acBarFg);
+    overlay.style.setProperty('--gi-accent-bar-glow', acBarGlow);
+    overlay.style.setProperty('--gi-accent-log',   acLog);
+    overlay.style.setProperty('--gi-accent-tag',   acTagline);
+
+    // ── Canvas particle rain ──────────────────────────────
+    let W, H, particles = [], animId;
+    function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+        constructor() { this.reset(true); }
+        reset(initial) {
+            this.x = Math.random() * W;
+            this.y = initial ? Math.random() * H : -10;
+            this.speed = .4 + Math.random() * 1.2;
+            this.len   = 8 + Math.random() * 24;
+            this.alpha = .1 + Math.random() * .35;
+            this.w     = .5 + Math.random() * .8;
+        }
+        update() {
+            this.y += this.speed;
+            if (this.y > H + 30) this.reset(false);
+        }
+        draw() {
+            ctx.beginPath();
+            const g = ctx.createLinearGradient(this.x, this.y - this.len, this.x, this.y);
+            g.addColorStop(0, `rgba(${acRgb},0)`);
+            g.addColorStop(1, `rgba(${acRgb},${this.alpha})`);
+            ctx.strokeStyle = g;
+            ctx.lineWidth = this.w;
+            ctx.moveTo(this.x, this.y - this.len);
+            ctx.lineTo(this.x, this.y);
+            ctx.stroke();
+        }
+    }
+
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    function drawCanvas() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        animId = requestAnimationFrame(drawCanvas);
+    }
+    drawCanvas();
+
+    // ── Boot log lines ─────────────────────────────────────
+    const bootLines = [
+        '> INITIALIZING PORTFOLIO SYSTEM...',
+        '> LOADING MODULES: automation, crm, javascript',
+        '> CALIBRATING WORKFLOW ENGINE... OK',
+        '> ALL SYSTEMS NOMINAL',
+    ];
+
+    function addLine(txt, delay) {
+        return new Promise(res => setTimeout(() => {
+            const el = document.createElement('div');
+            el.className = 'gi-log-line';
+            el.textContent = txt;
+            el.style.color = acLog;
+            bootLog.appendChild(el);
+            res();
+        }, delay));
+    }
+
+    // ── Progress bar ───────────────────────────────────────
+    const progWrap = document.createElement('div');
+    progWrap.className = 'gi-progress-wrap';
+    progWrap.style.background = acBar;
+    const progFill = document.createElement('div');
+    progFill.className = 'gi-progress-fill';
+    progFill.style.background = `linear-gradient(90deg, ${acBarFg}, ${acFull})`;
+    progFill.style.boxShadow = `0 0 8px ${acBarGlow}`;
+    progWrap.appendChild(progFill);
+
+    // Apply accent to logo and tagline via inline styles
+    function applyLogoColors() {
+        const brackets = logoWrap.querySelectorAll('.gi-logo-bracket');
+        brackets.forEach(b => b.style.color = acHalf);
+        const logoCursor = logoWrap.querySelector('.gi-logo-cursor');
+        logoCursor.style.background = acFull;
+        logoCursor.style.boxShadow = `0 0 12px ${acBarGlow}`;
+        logoText.style.textShadow = `0 0 30px ${acGlow}, 0 0 60px ${acGlow2}`;
+        tagline.style.color = acTagline;
+    }
+
+    // ── Sequence ───────────────────────────────────────────
+    async function runSequence() {
+        applyLogoColors();
+
+        // Step 1 — boot log (all 4 lines)
+        await addLine(bootLines[0], 300);
+        await addLine(bootLines[1], 650);
+        await addLine(bootLines[2], 1050);
+        await addLine(bootLines[3], 1400);
+
+        // Step 2 — progress bar appears right after last log line
+        await new Promise(res => setTimeout(res, 1550));
+        bootLog.parentElement.insertBefore(progWrap, bootLog.nextSibling);
+
+        // Animate progress bar 0→100%
+        let pct = 0;
+        await new Promise(res => {
+            const progInterval = setInterval(() => {
+                pct = Math.min(pct + (Math.random() * 18 + 4), 100);
+                progFill.style.width = pct + '%';
+                if (pct >= 100) { clearInterval(progInterval); res(); }
+            }, 80);
+        });
+
+        // Step 3 — logo appears (~300ms after progress done)
+        await new Promise(res => setTimeout(res, 300));
+        logoWrap.classList.add('gi-logo-in');
+
+        // Glitch: inject a dynamic <style> with accent-aware keyframe
+        const glitchStyle = document.createElement('style');
+        glitchStyle.id = 'gi-glitch-style';
+        glitchStyle.textContent = `
+            @keyframes giGlitch {
+                0%  { text-shadow: 2px 0 #ff0080, -2px 0 ${acFull}; clip-path: inset(10% 0 60% 0); }
+                33% { text-shadow: -2px 0 #ff0080, 2px 0 ${acFull}; clip-path: inset(50% 0 20% 0); transform: translateX(2px); }
+                66% { text-shadow: 1px 0 #ff0080, -1px 0 ${acFull}; clip-path: inset(30% 0 40% 0); transform: translateX(-1px); }
+                100%{ text-shadow: 0 0 30px ${acGlow}, 0 0 60px ${acGlow2}; clip-path: none; transform: none; }
+            }
+        `;
+        document.head.appendChild(glitchStyle);
+        logoText.style.animation = `giGlitch .15s steps(2) forwards`;
+
+        // Step 4 — blinking cursor
+        const logoCursor = logoWrap.querySelector('.gi-logo-cursor');
+        setTimeout(() => logoCursor.classList.add('visible'), 500);
+
+        // Step 5 — tagline
+        setTimeout(() => tagline.classList.add('gi-tag-in'), 700);
+
+        // Step 6 — "press any key" + enable dismiss
+        setTimeout(() => {
+            pressEl.classList.add('gi-press-in');
+            canDismiss = true;
+        }, 1200);
+    }
+
+    // ── Dismiss ────────────────────────────────────────────
+    let canDismiss = false;
+
+    runSequence();
+
+    function dismiss() {
+        if (!canDismiss) return;
+        sessionStorage.setItem('gi_seen', '1');
+        // Inject accent-colored burst style
+        const burstStyle = document.createElement('style');
+        burstStyle.textContent = `.gi-overlay.gi-exit-burst::after { background: radial-gradient(circle at center, rgba(${acRgb},.22) 0%, transparent 70%); }`;
+        document.head.appendChild(burstStyle);
+        overlay.classList.add('gi-exit-burst');
+        overlay.classList.add('gi-fade-out');
+        cancelAnimationFrame(animId);
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            burstStyle.remove();
+        }, 650);
+    }
+
+    overlay.addEventListener('click', dismiss);
+    document.addEventListener('keydown', dismiss, { once: true });
+})();
+// ===================== END GAME INTRO =====================
+
 // ===================== CURSOR =====================
 const cursor = document.getElementById('cursor');
 const cursorDot = document.getElementById('cursorDot');
@@ -20,7 +250,7 @@ btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth'
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav-links');
 
-function openNav()  { hamburger.classList.add('active');    navLinks.classList.add('active'); }
+function openNav() { hamburger.classList.add('active'); navLinks.classList.add('active'); }
 function closeNav() { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }
 function toggleNav() { navLinks.classList.contains('active') ? closeNav() : openNav(); }
 
@@ -386,7 +616,7 @@ function applyAccent(accent, dim) {
     applyBgEffect(currentBgEffect, rgb);
     // Update glass depth layer if glass mode is active
     if (document.documentElement.getAttribute('data-visual') === 'glass') {
-        try { updateGlassDepthLayer(); } catch(e) {}
+        try { updateGlassDepthLayer(); } catch (e) { }
     }
 }
 
@@ -922,7 +1152,7 @@ function applyBgEffect(type, rgb) {
 
     // Re-pin depth layer after canvases whenever bg effect changes
     if (document.documentElement.getAttribute('data-visual') === 'glass') {
-        try { updateGlassDepthLayer(); } catch(e) {}
+        try { updateGlassDepthLayer(); } catch (e) { }
     }
 }
 
@@ -1254,10 +1484,10 @@ function startCircuitCanvas(canvas, rgb) {
         }
 
         // Connect adjacent nodes with traces (horizontal + vertical + some L-bends)
-        const dirs = [[1,0],[0,1]];
+        const dirs = [[1, 0], [0, 1]];
         for (const node of nodes) {
             for (const [dc, dr] of dirs) {
-                const neighbor = grid[`${node.c+dc},${node.r+dr}`];
+                const neighbor = grid[`${node.c + dc},${node.r + dr}`];
                 if (!neighbor) continue;
                 // ~65% chance to draw a trace between adjacent nodes
                 if (Math.random() < 0.65) {
@@ -1329,7 +1559,7 @@ function startCircuitCanvas(canvas, rgb) {
                 // Component pad: small square
                 const s = 4;
                 ctx.fillStyle = `rgba(${ar},${ag},${ab},${(a * 0.6).toFixed(3)})`;
-                ctx.fillRect(nd.x - s/2, nd.y - s/2, s, s);
+                ctx.fillRect(nd.x - s / 2, nd.y - s / 2, s, s);
             } else {
                 // Junction dot
                 ctx.beginPath();
@@ -1514,7 +1744,7 @@ document.querySelectorAll('[data-theme]').forEach(btn => {
         root.style.setProperty('--border', t.border);
         // Update glass depth layer if glass mode is active
         if (document.documentElement.getAttribute('data-visual') === 'glass') {
-            try { updateGlassDepthLayer(); } catch(e) {}
+            try { updateGlassDepthLayer(); } catch (e) { }
         }
         saveSetting('theme', btn.dataset.theme);
     });

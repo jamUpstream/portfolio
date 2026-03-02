@@ -134,6 +134,30 @@
 </head>
 
 <body>
+    <!-- ===== GAME INTRO OVERLAY ===== -->
+    <div id="gameIntro" class="gi-overlay" aria-hidden="true">
+        <canvas id="giCanvas"></canvas>
+        <div class="gi-scanlines"></div>
+        <div class="gi-content">
+            <div class="gi-boot-log" id="giBootLog"></div>
+            <div class="gi-logo-wrap" id="giLogoWrap">
+                <div class="gi-logo-bracket gi-bracket-left">&lt;</div>
+                <div class="gi-logo-text" id="giLogoText">/Jam</div>
+                <div class="gi-logo-bracket gi-bracket-right">&gt;</div>
+                <div class="gi-logo-cursor"></div>
+            </div>
+            <div class="gi-tagline" id="giTagline">SYSTEM AUTOMATION ENGINEER</div>
+            <div class="gi-press" id="giPress">[ PRESS ANY KEY TO ENTER ]</div>
+        </div>
+        <div class="gi-corner gi-tl"></div>
+        <div class="gi-corner gi-tr"></div>
+        <div class="gi-corner gi-bl"></div>
+        <div class="gi-corner gi-br"></div>
+        <div class="gi-hbar gi-hbar-top"></div>
+        <div class="gi-hbar gi-hbar-bot"></div>
+    </div>
+    <!-- ===== END GAME INTRO ===== -->
+
     <canvas id="starsCanvas" aria-hidden="true"></canvas>
     <canvas id="wavesCanvas" aria-hidden="true"></canvas>
 
