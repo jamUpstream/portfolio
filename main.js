@@ -15,6 +15,10 @@
         return;
     }
 
+    // Lock scroll while intro is playing
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
     // ── Read saved accent color ───────────────────────────
     const savedAccent = localStorage.getItem('pf_accent') || '#00F5A0';
     // Parse hex → rgb
@@ -219,6 +223,8 @@
         cancelAnimationFrame(animId);
         setTimeout(() => {
             overlay.style.display = 'none';
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
             burstStyle.remove();
         }, 650);
     }
