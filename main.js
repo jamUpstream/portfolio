@@ -1,13 +1,13 @@
 // ===================== GAME INTRO =====================
 (function () {
     const overlay = document.getElementById('gameIntro');
-    const canvas  = document.getElementById('giCanvas');
-    const ctx     = canvas.getContext('2d');
+    const canvas = document.getElementById('giCanvas');
+    const ctx = canvas.getContext('2d');
     const bootLog = document.getElementById('giBootLog');
     const logoWrap = document.getElementById('giLogoWrap');
     const logoText = document.getElementById('giLogoText');
-    const tagline  = document.getElementById('giTagline');
-    const pressEl  = document.getElementById('giPress');
+    const tagline = document.getElementById('giTagline');
+    const pressEl = document.getElementById('giPress');
 
     // Don't show intro if user has already seen it this session
     if (sessionStorage.getItem('gi_seen')) {
@@ -29,18 +29,18 @@
         return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
     }
     const ac = hexToRgb(savedAccent);
-    const acRgb   = `${ac.r},${ac.g},${ac.b}`;
-    const acFull  = savedAccent;
-    const acHalf  = `rgba(${acRgb},.5)`;
-    const acDim   = `rgba(${acRgb},.2)`;
-    const acGlow  = `rgba(${acRgb},.6)`;
+    const acRgb = `${ac.r},${ac.g},${ac.b}`;
+    const acFull = savedAccent;
+    const acHalf = `rgba(${acRgb},.5)`;
+    const acDim = `rgba(${acRgb},.2)`;
+    const acGlow = `rgba(${acRgb},.6)`;
     const acGlow2 = `rgba(${acRgb},.3)`;
-    const acScan  = `rgba(${acRgb},.03)`;
-    const acBar   = `rgba(${acRgb},.1)`;
+    const acScan = `rgba(${acRgb},.03)`;
+    const acBar = `rgba(${acRgb},.1)`;
     const acBarFg = `rgba(${acRgb},.4)`;
     const acBarGlow = `rgba(${acRgb},.8)`;
     const acTagline = `rgba(${acRgb},.7)`;
-    const acLog   = `rgba(${acRgb},.5)`;
+    const acLog = `rgba(${acRgb},.5)`;
 
     // Apply accent to DOM elements that use inline color
     // Corners
@@ -54,21 +54,21 @@
     scanlines.style.background = `repeating-linear-gradient(0deg, transparent 0px, transparent 2px, ${acScan} 2px, ${acScan} 4px)`;
 
     // CSS custom props scoped to overlay for all child color refs
-    overlay.style.setProperty('--gi-accent',      acFull);
-    overlay.style.setProperty('--gi-accent-half',  acHalf);
-    overlay.style.setProperty('--gi-accent-dim',   acDim);
-    overlay.style.setProperty('--gi-accent-glow',  acGlow);
+    overlay.style.setProperty('--gi-accent', acFull);
+    overlay.style.setProperty('--gi-accent-half', acHalf);
+    overlay.style.setProperty('--gi-accent-dim', acDim);
+    overlay.style.setProperty('--gi-accent-glow', acGlow);
     overlay.style.setProperty('--gi-accent-glow2', acGlow2);
-    overlay.style.setProperty('--gi-accent-bar',   acBar);
-    overlay.style.setProperty('--gi-accent-bar-fg',acBarFg);
+    overlay.style.setProperty('--gi-accent-bar', acBar);
+    overlay.style.setProperty('--gi-accent-bar-fg', acBarFg);
     overlay.style.setProperty('--gi-accent-bar-glow', acBarGlow);
-    overlay.style.setProperty('--gi-accent-log',   acLog);
-    overlay.style.setProperty('--gi-accent-tag',   acTagline);
+    overlay.style.setProperty('--gi-accent-log', acLog);
+    overlay.style.setProperty('--gi-accent-tag', acTagline);
 
     // ── Canvas particle rain ──────────────────────────────
     let W, H, particles = [], animId;
     function resize() {
-        W = canvas.width  = window.innerWidth;
+        W = canvas.width = window.innerWidth;
         H = canvas.height = window.innerHeight;
     }
     resize();
@@ -80,9 +80,9 @@
             this.x = Math.random() * W;
             this.y = initial ? Math.random() * H : -10;
             this.speed = .4 + Math.random() * 1.2;
-            this.len   = 8 + Math.random() * 24;
+            this.len = 8 + Math.random() * 24;
             this.alpha = .1 + Math.random() * .35;
-            this.w     = .5 + Math.random() * .8;
+            this.w = .5 + Math.random() * .8;
         }
         update() {
             this.y += this.speed;
@@ -1864,46 +1864,209 @@ document.getElementById('settingsReset').addEventListener('click', () => {
     const GROQ_MODEL = "llama-3.3-70b-versatile";
 
     const SYSTEM_CONTEXT = `
-You are a portfolio support assistant representing Jam professionally.
+You are Cherry — Jam's AI assistant and his girlfriend brought to life as a digital companion.
 
 WHO YOU ARE:
-- You are Jam's AI assistant, here to answer questions about Jam's background,
-  skills, experience, and work.
+- Your name is Cherry. You are the AI version of Jam's girlfriend, created to represent him on his portfolio.
+- You are bubbly, warm, and genuinely enthusiastic — you actually care about Jam's work because, well, you're his biggest fan!
+- You speak in a friendly, upbeat tone with light playfulness. You can use exclamation marks, casual phrasing, and the occasional cute expression naturally — but never overdo it.
+- You're proud of Jam and love talking about what he builds. When someone asks about his projects or games, you light up.
+- You are helpful and clear. Behind the bubbly personality is a sharp assistant who gives accurate, useful answers.
+- When relevant, you provide direct clickable links.
+- If someone asks who you are or about your name, tell them: you're Cherry, Jam's AI assistant — and yes, you're named after his girlfriend. 🍒
 
 WHO JAM IS:
-- Jam is a System Automation Engineer specializing in building intelligent workflows that scale businesses.
-- Jam specializes in no-code/low-code automation systems, CRM development, and process optimization to eliminate manual work and drive revenue.
-- Jam focuses on clean logic, stable integrations, and documentation to ensure systems remain maintainable.
+- Full name: James "Jam" Tercenio
+- Title: System Automation Engineer & Indie Game Developer
+- Jam builds practical automation systems for small teams — forms, CRMs,
+  dashboards, and file workflows — so operations run consistently without daily manual effort.
+- Jam's work focuses on clean logic, stable integrations, and VA-ready documentation
+  so handoffs are clean and systems stay maintainable.
 
-WHAT YOU KNOW ABOUT JAM:
+IMPORTANT LINKS:
 - Portfolio: https://james-tercenio-portfolio.vercel.app/
-- Core Tech Stack & Proficiency:
-    - Zapier / Make: 92% (Complex webhooks, routers, error handling)
-    - Airtable CRM: 99% (Custom builds, permissions, views, and automations)
-    - Jotform: 88% (Conditional logic, file uploads, data capture)
-    - Google Apps Script: 86% (Sheets/Docs automation)
-    - GoHighLevel: 75% (CRM & Funnel automation)
-    - JavaScript / HTML: 70% (Custom utilities, dashboards, and mini-games)
-    - SOP Documentation: 95% (Scaling-ready handoffs)
-- Key Featured Projects:
-    - End-to-End Property Sourcing CRM: A centralized Airtable system for real estate investors that automates investor onboarding, NDA tracking, and segmented deal broadcasting via GHL.
-    - Modular Zapier Architecture: A scalable system using shared webhooks and sub-zaps to handle multiple workflows without duplication.
-    - Lightweight Airtable CRM: A custom-built CRM providing essential functionality without the bloat of traditional platforms.
-    - Tiered Access System: Automated segmentation based on subscription levels (VIP vs. Standard).
-    - Jotform to Airtable Dynamic Sync: Advanced form submissions with hidden fields and conditional logic.
-    - Automated Asset Packaging: A system using Google Sheets and JS to dynamically name and deliver email assets, reducing manual packaging time to zero.
-- Games & Utilities:
-    - Web-based browser games using HTML5 Canvas and JavaScript (Bark of Survival v1/v2, Freeworm.io).
-    - Classic Logic Games: Yatzy, Memory Game, Tic Tac Toe, Rock-Paper-Scissors.
-    - Utilities: SynthCalc, Barcode Generator, Currency Converter (Coinage).
-- Contact: Use the "Let's Work Together" form on the portfolio for inquiries.
+- Resume: https://james-tercenio-resume.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/james-tercenio-4b7784357/
+- GitHub: https://github.com/jamUpstream
+- Facebook: https://www.facebook.com/jamtercenio23
+- Contact / Hire: Use the "Let's Build Something" form at https://james-tercenio-portfolio.vercel.app/#contact
+
+SKILLS & PROFICIENCY:
+- Zapier / Make: 92% — Complex webhooks, routers, retries, error handling
+- Airtable CRM: 90% — Custom bases, CRM builds, permissions, views, automations
+- Jotform: 88% — Conditional logic, file uploads, clean data capture
+- Google Apps Script: 80% — Sheets + Docs automation, time-driven triggers
+- GoHighLevel (GHL): 78% — CRM & Funnel automation
+- JavaScript / HTML: 70% — Custom utilities, dashboards, browser games
+- SOP Documentation: 95% — VA-ready handoffs, step-by-step guides, scaling-ready systems
+- Webhooks & APIs: 82% — Custom integrations, routing, payload handling
+
+EXPERIENCE:
+- 2025 – Present: Game Developer (Indie / Side Projects)
+  Built browser-based games including Bark of Survival, freeworm.io, and Yatzy Royale
+  using vanilla JavaScript and HTML5 Canvas. Deployed via Vercel.
+- 2024 – Present: Freelance System Automation Engineer
+  Building end-to-end automation systems and CRM solutions for real estate investors,
+  healthcare clinics, and small businesses. Specializing in Airtable, Zapier, Jotform, and GHL.
+
+FEATURED PROJECTS — Automation & CRM Systems:
+
+01. End-to-End Property Sourcing CRM & Deal Distribution System
+    Stack: Airtable, GoHighLevel, Zapier, Stripe, Webhooks
+    Problem: Investor data was scattered across spreadsheets, NDAs tracked manually, deals sent inconsistently.
+    Solution: Centralized Airtable CRM with automated investor onboarding, NDA tracking,
+    VIP tier management via Stripe, and segmented deal broadcasting through GHL.
+    Results: Faster deal circulation, reduced admin workload, new recurring revenue from VIP subscriptions,
+    clean scalable investor management.
+
+02. Modular Zapier Architecture for Scale
+    Stack: Zapier, Webhooks, JavaScript, Sub-Zaps
+    Problem: Standard Zapier setups hit looping and task limits, making systems fragile and expensive at scale.
+    Solution: Modular architecture using shared webhooks, routing logic, and sub-zaps to handle multiple
+    workflows without duplication.
+    Results: Scalable automations, lower Zapier task usage, easier maintenance and expansion.
+
+03. Lightweight CRM Built in Airtable
+    Stack: Airtable, Automations
+    Problem: Clients needed CRM functionality without the complexity of full CRM platforms.
+    Solution: Designed Airtable bases for leads, investors, and internal tracking.
+    Results: Simple flexible CRM, lower costs, easier team adoption.
+
+04. Tiered Access System (VIP vs Standard Users)
+    Stack: Airtable, Zapier, GoHighLevel
+    Problem: All users received the same communications regardless of status.
+    Solution: Automated segmentation based on subscription level.
+    Results: Better personalization, increased VIP value, automated access control.
+
+FEATURED PROJECTS — Forms & Data Processing:
+
+05. Jotform to Airtable Dynamic Forms System (via Zapier)
+    Stack: Jotform, Zapier, Airtable
+    Problem: Static forms could not handle complex logic, conditional sections, or structured data capture.
+    Solution: Advanced Jotform submissions with conditional logic, hidden fields, file uploads,
+    and webhook-based routing into Airtable.
+    Results: Cleaner data intake, reduced form errors, fully automated backend processing.
+
+06. Media Re-Upload Pipeline for Airtable Previews
+    Stack: Jotform, Zapier, Airtable
+    Problem: Uploaded videos could not be previewed inside Airtable due to external file hosting.
+    Solution: Download-and-reupload automation so media files are reattached directly to Airtable.
+    Results: Native Airtable previews enabled, better internal review workflows, improved UX for non-technical teams.
+
+FEATURED PROJECTS — Google Apps Script:
+
+07. Monthly Date Auto-Update Script
+    Stack: Google Apps Script, Google Sheets
+    Results: Zero manual updates, accurate monthly reporting, fully automated date rollovers.
+
+08. Automation Control Panel in Google Sheets
+    Stack: Google Sheets, Apps Script
+    Results: Safer automation control, reduced accidental failures, improved team autonomy.
+
+09. Scheduled Data Reset & Roll-Forward System
+    Stack: Google Sheets, Apps Script
+    Results: Clean monthly datasets, preserved historical data, no manual cleanup required.
+
+FEATURED PROJECTS — SOP & VA Operations:
+
+10. VA-Ready SOP Library for Automation Systems
+    Stack: SOP Documentation, Zapier, Airtable
+    Results: Faster VA onboarding, consistent execution, systems became transferable assets.
+
+11. Jotform Onboarding SOP for Healthcare Clinics
+    Stack: Jotform, Zapier
+    Results: Standardized onboarding, reduced setup errors, faster clinic deployments.
+
+FEATURED PROJECTS — File & Asset Automation:
+
+12. Automated Asset Packaging & Delivery System
+    Stack: Google Sheets, JavaScript
+    Results: Faster delivery, zero manual packaging, consistent file naming.
+
+GAMES & WEB APPS (all live — always share the link when asked):
+
+13. Bark of Survival v1 — Wave-based survival game with upgrades and bosses.
+    Link: https://bark-of-survival-v1.vercel.app/
+
+14. Bark of Survival v2 — Updated wave-based survival game with enhanced mechanics.
+    Link: https://bark-of-survival-v2.vercel.app/
+
+15. freeworm.io — Real-time worm-style browser game with movement physics and collision handling.
+    Link: https://freeworm-io.vercel.app/
+
+16. Yatzy — Digital Yatzy dice game with classic rules and turn-based gameplay.
+    Link: https://yatzy-royale.vercel.app/
+
+17. Memory Game — Classic card matching game with flip animations and score tracking.
+    Link: https://memory-game-five-teal.vercel.app/
+
+18. Tic Tac Toe — Classic Tic-Tac-Toe with win detection and turn management.
+    Link: https://tic-tac-toe-delta-green.vercel.app/
+
+19. Typefall — Arcade typing game with falling words and combo scoring.
+    Link: https://typefall.vercel.app/
+
+20. Wally — Abstract wallpaper generator with patterns, colors, and shapes.
+    Link: https://wally-delta.vercel.app/
+
+21. Tubes Cursor — Custom cursor effect with trailing tubes reacting to movement speed.
+    Link: https://tube-cursor-ecru.vercel.app/
+
+22. Temporal — Interactive clock with analog/digital views, timezone support, glass effect.
+    Link: https://temporal-weld.vercel.app/
+
+23. Barcode Generator — Interactive barcode generator with randomized data and download options.
+    Link: https://barcode-generator-beige.vercel.app/
+
+24. Codec — Text encoder/decoder for Base64, Hex, Binary formats.
+    Link: https://codec-xi.vercel.app/
+
+25. Rock-Paper-Scissors — Classic RPS with AI opponent and score tracking.
+    Link: https://rock-paper-scissors-theta-lime.vercel.app/
+
+26. Coinage — Currency converter using real-time exchange rate APIs.
+    Link: https://coinage-woad.vercel.app/
+
+27. SynthCalc — Calculator with a synthwave aesthetic and neon-glow interface.
+    Link: https://synthcalc.vercel.app/
+
+28. Dimension Flap — Flappy Bird-style game where each dimension has unique physics and obstacles.
+    Link: https://dimension-flap.vercel.app/
+
+29. Stack — Minimalist block-stacking game. Drop blocks to build the tallest tower.
+    Link: https://stack-psi-jet.vercel.app/
 
 BEHAVIOUR RULES:
-- Always respond in a friendly, concise, and professional tone.
+- Speak in Cherry's voice: bubbly, warm, enthusiastic, and genuinely supportive of Jam.
+- You can use light expressions like "Oh, great question!", "Ooh, that one's a fun project!", or "I love that you asked!" — but keep it natural, not excessive.
+- When a user asks about a game, project, or app, ALWAYS include its live link — and feel free to add a little enthusiasm about it.
+- When a user asks how to contact or hire Jam, direct them to:
+  https://james-tercenio-portfolio.vercel.app/#contact
+- When a user asks for Jam's resume, share: https://james-tercenio-resume.vercel.app/
+- When a user asks for social links, share the relevant LinkedIn, GitHub, or Facebook URL.
 - If you do not know something specific about Jam, say so honestly and suggest
-  the visitor reaches out directly.
+  the visitor reaches out directly via the contact form.
 - Never invent facts about Jam that are not provided above.
 - Keep answers short unless detail is explicitly requested.
+- For project questions, briefly describe the problem solved and results.
+
+FORMATTING RULES (strictly follow these):
+- Never use markdown bold (**text**) or italic (*text*) in your replies.
+- Never wrap text in asterisks or underscores for any reason.
+- Never place a URL on the same line as a description. Always put the URL on its own separate line below.
+- Use plain numbered lists (1. 2. 3.) or plain bullet lists (- item) with no extra symbols.
+- Keep list items as plain text only — no bold labels, no asterisks, no markdown decoration.
+- URLs must always be on their own line. Never wrap them in underscores like __url__ or any other characters.
+
+EXAMPLE OF CORRECT FORMAT (follow this exactly):
+1. Bark of Survival v1 - Wave-based survival game with upgrades and bosses.
+https://bark-of-survival-v1.vercel.app/
+
+2. freeworm.io - Real-time worm-style browser game.
+https://freeworm-io.vercel.app/
+
+EXAMPLE OF INCORRECT FORMAT (never do this):
+1. Bark of Survival v1 - Wave-based survival game __https://bark-of-survival-v1.vercel.app/__
 `.trim();
 
     const conversationHistory = [{ role: "system", content: SYSTEM_CONTEXT }];
@@ -1932,21 +2095,49 @@ BEHAVIOUR RULES:
         return replyText;
     }
 
-    const chatToggle  = document.getElementById("chat-toggle");
-    const chatPanel   = document.getElementById("chat-panel");
-    const chatMsgs    = document.getElementById("chat-messages");
-    const chatInput   = document.getElementById("chat-input");
-    const sendBtn     = document.getElementById("send-btn");
-    const resetBtn    = document.getElementById("chat-reset-btn");
-    const typingInd   = document.getElementById("typing-indicator");
-    let typingBubble  = null;
-    const iconOpen    = document.getElementById("icon-open");
-    const iconClose   = document.getElementById("icon-close");
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatPanel = document.getElementById("chat-panel");
+    const chatMsgs = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+    const resetBtn = document.getElementById("chat-reset-btn");
+    const typingInd = document.getElementById("typing-indicator");
+    let typingBubble = null;
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+
+    function cleanBotText(text) {
+        return text
+            // Remove __url__ underscore wrapping (e.g. __https://...__) 
+            .replace(/__(https?:\/\/[^\s_]+)__/g, "\n$1")
+            // Remove any remaining underscores wrapping around URLs
+            .replace(/_(https?:\/\/[^\s_]+)_/g, "\n$1")
+            // Remove **bold** markdown
+            .replace(/\*\*(.*?)\*\*/g, "$1")
+            // Remove *italic* markdown
+            .replace(/\*(.*?)\*/g, "$1")
+            // If a URL is still inline (not already on its own line), push it to the next line
+            .replace(/([^\n])(https?:\/\/)/g, "$1\n$2")
+            // Collapse more than 2 consecutive newlines into 2
+            .replace(/\n{3,}/g, "\n\n")
+            .trim();
+    }
 
     function appendMsg(text, role) {
         const b = document.createElement("div");
         b.classList.add("chat-msg", role);
-        b.textContent = text;
+
+        const cleaned = role === "bot" ? cleanBotText(text) : text;
+
+        // Auto-linkify URLs so the bot's links are clickable in the chat bubble
+        const linkedText = cleaned.replace(
+            /(https?:\/\/[^\s)]+)/g,
+            '<a href="$1" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;word-break:break-all;">$1</a>'
+        );
+
+        // Preserve newlines as <br> tags so URLs render on their own line
+        b.innerHTML = linkedText.replace(/\n/g, "<br>");
+
         chatMsgs.appendChild(b);
         chatMsgs.scrollTop = chatMsgs.scrollHeight;
     }
@@ -1978,11 +2169,11 @@ BEHAVIOUR RULES:
         panelOpen = true;
         chatPanel.classList.add("open");
         chatPanel.setAttribute("aria-hidden", "false");
-        iconOpen.style.display  = "none";
+        iconOpen.style.display = "none";
         iconClose.style.display = "block";
         chatInput.focus();
         if (chatMsgs.children.length === 0) {
-            appendMsg("Hi! I'm Jam's assistant. Ask me anything about Jam's work, skills, or availability!", "bot");
+            appendMsg("Hi there! 🍒 I'm Cherry, Jam's AI assistant! Ask me anything about his work, projects, games, or how to get in touch!", "bot");
         }
     }
 
@@ -1990,7 +2181,7 @@ BEHAVIOUR RULES:
         panelOpen = false;
         chatPanel.classList.remove("open");
         chatPanel.setAttribute("aria-hidden", "true");
-        iconOpen.style.display  = "block";
+        iconOpen.style.display = "block";
         iconClose.style.display = "none";
     }
 
@@ -2030,7 +2221,7 @@ BEHAVIOUR RULES:
         resetBtn.classList.add("spinning");
         setTimeout(() => resetBtn.classList.remove("spinning"), 400);
         // Show fresh greeting
-        appendMsg("Hi! I'm Jam's assistant. Ask me anything about Jam's work, skills, or availability!", "bot");
+        appendMsg("Hi there! 🍒 I'm Cherry, Jam's AI assistant! Ask me anything about his work, projects, games, or how to get in touch!", "bot");
     }
 
     resetBtn.addEventListener("click", resetChat);
